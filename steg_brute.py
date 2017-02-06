@@ -15,7 +15,14 @@ class color:
     ENDC = '\033[0m'
     GREEN = '\033[1;32m'
 
+    
+def check_file(file):
+    if os.path.exists(file):
+        return True
+    else:
+        return False
 
+    
 VERSION = "1.0"
 
 SAMPLES = """
@@ -48,9 +55,10 @@ def Steg_brute(ifile, dicc):
             if not "no pude extraer" in r:
                 print(color.GREEN + "\n\n " + r + color.ENDC)
                 print("\n\n [+] " + color.INFO + "Information obtained with password:" + color.GREEN + " %s\n" % password + color.ENDC)
-                with open(ofile, 'r') as outfile:
-                    for line in outfile.readlines():
-                        print(line)
+                if check_file(ofile):
+                    with open(ofile, 'r') as outfile:
+                        for line in outfile.readlines():
+                            print(line)
                 break
             pbar.update(i + 1)
             i += 1
@@ -62,9 +70,10 @@ def steghide(ifile, passwd):
     if not "no pude extraer" in r:
         print(color.GREEN + "\n\n " + r + color.ENDC)
         print("\n [+] " + color.INFO + "Information obtained: \n" + color.ENDC)
-        with open(ofile, 'r') as myfile:
-            for line in myfile.readlines():
-                print(line)
+        if check_file(ofile):
+            with open(ofile, 'r') as myfile:
+                for line in myfile.readlines():
+                    print(line)
     else:
         print(color.FAIL + "\n\n " + r + color.ENDC)
 
