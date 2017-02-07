@@ -51,7 +51,7 @@ def Steg_brute(ifile, dicc):
         pbar = ProgressBar(widgets=[Percentage(), Bar()], maxval=nlines).start()
         for line in passFile.readlines():
             password = line.strip('\n')
-            r = commands.getoutput("steghide extract -sf %s -p %s -xf %s" % (ifile, password, ofile))
+            r = commands.getoutput("steghide extract -sf %s -p '%s' -xf %s" % (ifile, password, ofile))
             if not "no pude extraer" in r and not "could not extract" in r:
                 print(color.GREEN + "\n\n " + r + color.ENDC)
                 print("\n\n [+] " + color.INFO + "Information obtained with password:" + color.GREEN + " %s\n" % password + color.ENDC)
@@ -66,7 +66,7 @@ def Steg_brute(ifile, dicc):
 
 def steghide(ifile, passwd):
     ofile = ifile.split('.')[0] + "_flag.txt"
-    r = commands.getoutput("steghide extract -sf %s -p %s -xf %s" % (ifile, passwd, ofile))
+    r = commands.getoutput("steghide extract -sf %s -p '%s' -xf %s" % (ifile, passwd, ofile))
     if not "no pude extraer" in r and not "could not extract" in r:
         print(color.GREEN + "\n\n " + r + color.ENDC)
         print("\n [+] " + color.INFO + "Information obtained: \n" + color.ENDC)
